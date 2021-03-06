@@ -17,8 +17,14 @@ bot.start((ctx) => {
   toInsert.finalize();
 })
 
-const job = new CronJob('0 0 9 * * *', () => {
+const job = new CronJob('0 0 8 * * *', () => {
   db.each("SELECT DISTINCT id FROM ids", (err, row) => bot.telegram.sendAudio(row.id, {source: `./bomdia.mp3`}))
   }, null, true, 'America/Sao_Paulo')
 
-bot.launch()
+bot.launch({
+  webhook: {
+    domain: 'https://bot-bomdia.herokuapp.com/',
+    hookPath: '/RANDOM_ID',
+    port: process.env.PORT
+  }
+});
