@@ -1,3 +1,5 @@
 node_modules
+.dynamodb
+.serverless
 .env
-meusIds.db
+.esbuild
